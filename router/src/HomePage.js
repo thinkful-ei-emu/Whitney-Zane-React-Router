@@ -3,12 +3,12 @@ import Heading from './Heading';
 import FolderList from './FolderList';
 import NoteList from './NoteList';
 
-function Homepage() {
+function Homepage(props) {
 
   return (
     <div> <Heading />
       <FolderList />
-      <NoteList />
+      <NoteList notes={props.notes} />
     </div>)
 }
 

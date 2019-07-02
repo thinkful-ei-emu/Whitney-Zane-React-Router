@@ -14,16 +14,18 @@ import Homepage from './HomePage';
 class App extends React.Component {
 
  state={
-   store:Store
+   store:Store,
+   notes:Store.notes,
+   folder:Store.folders
  }
 
   render() {
     return (
       <div className="App">
         
-        <Route exact path='/'component={Homepage}/>
-        <Route inexact path='/folder/:folderid'component={NoteList}/>
-       
+        <Route exact path='/'render={()=>(<Homepage notes={this.state.store.notes}/>)}/>
+        <Route inexact path='/note/:noteid'render={()=>(<NoteList notes={this.state.store.notes}/>)}/>
+        <Route  path='/folder/:folderid'/>
       </div>
     );
   }
