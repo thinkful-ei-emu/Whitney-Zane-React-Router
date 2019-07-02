@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
-import Heading from './Heading';
-import NoteList from './NoteList';
-import FolderList from './FolderList';
+import NotePage from './NotePage';
+import FolderPage from './FolderPage';
 import Store from './Store'
 import {Route}from 'react-router-dom';
 import Homepage from './HomePage';
@@ -16,16 +15,21 @@ class App extends React.Component {
  state={
    store:Store,
    notes:Store.notes,
-   folder:Store.folders
+   folders:Store.folders
  }
 
   render() {
     return (
       <div className="App">
         
-        <Route exact path='/'render={()=>(<Homepage notes={this.state.store.notes}/>)}/>
-        <Route inexact path='/note/:noteid'render={()=>(<NoteList notes={this.state.store.notes}/>)}/>
-        <Route  path='/folder/:folderid'/>
+        <Route exact path='/'render={()=>(<Homepage folders={this.state.folders} notes={this.state.notes}/>)}/>
+        <Route inexact path='/note/:noteid'render={({match})=>(<NotePage folders={this.state.folders} 
+          notes={this.state.notes.filter(note => note.id === match.params.noteid)}/>)}/>
+        <Route  path='/folder/:folderid' render={
+          ({match}) => (
+            <FolderPage folders={this.state.folders} notes={
+              this.state.notes.filter(note => note.folderId === match.params.folderid )}/>
+            )}/>
       </div>
     );
   }

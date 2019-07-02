@@ -6,8 +6,9 @@ import NoteList from './NoteList';
 function Homepage(props) {
 
   return (
-    <div> <Heading />
-      <FolderList />
+    <div> 
+      <Heading />
+      <FolderList folders={props.folders}/>
       <NoteList notes={props.notes} />
     </div>)
 }
